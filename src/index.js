@@ -8,11 +8,17 @@ import NewTaskForm from './components/NewTaskForm/NewTaskForm';
 
 
 const App = () => {
+
+    const todoData = [
+        {label: 'Eat breakfast', id: 1},
+        {label: 'Learn JavaScript', id: 2},
+        {label: 'Reading book', id: 3}
+    ]
     return (
         <div className="todoapp">
             <NewTaskForm />
             <section className="main">
-                <TaskList />
+                <TaskList taskList = { todoData }/>
                 <Footer />
             </section>
         </div>

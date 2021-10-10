@@ -1,18 +1,19 @@
 import React from 'react';
+import { formatDistance, subDays } from 'date-fns'
 
-const Task = () => {
+const Task = ({ prop }) => {
+
+    const dates = formatDistance(subDays(new Date(), 3), new Date())
     return (
-        <li>
-            <div className="view">
+        <div className="view">
             <input className="toggle" type="checkbox"></input>
             <label>
-                <span className="description">Active task</span>
-                <span className="created">created 5 minutes ago</span>
+                <span className="description">{ prop }</span>
+                <span className="created">{ dates }</span>
             </label>
             <button className="icon icon-edit"></button>
             <button className="icon icon-destroy"></button>
-            </div>
-        </li>
+        </div>
     )
 }
 export default Task;
