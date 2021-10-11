@@ -3,11 +3,9 @@ import Task from '../Task/Task';
 
 const TaskList = ({ taskList }) => {
     const elem = taskList.map(item => {
-        const { id, label } = item
+        const { id, description } = item
         return (
-            <li key = { id }>
-                <Task prop = { label }/>
-            </li>
+            <Task key= { id } description={ description }/>
         )
     })
     return (
