@@ -6,12 +6,16 @@ export default class Task extends React.Component {
     state = { isCompleted: false }
 
     onCompletedClick = () => {
-        this.setState({ isCompleted: !this.state.isCompleted })
+        this.setState((state) => {
+            return {
+                isCompleted: !state.isCompleted
+            }
+        })
     }
     render() {
-        const { description } = this.props
+        const { description, deleteTask } = this.props
         let className = ''
-        className = this.state.isCompleted ? className += 'completed' : ''
+        if(this.state.isCompleted) className += 'completed'
 
         return (
             <li className= { className }>
@@ -22,7 +26,7 @@ export default class Task extends React.Component {
                         <span className="created">create 5 days ago</span>
                     </label>
                     <button className="icon icon-edit"></button>
-                    <button className="icon icon-destroy"></button>
+                    <button className="icon icon-destroy" onClick={ deleteTask }></button>
                 </div>
             </li>
         )
