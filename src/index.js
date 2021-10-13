@@ -10,9 +10,10 @@ class App extends React.Component {
 
     state = {
         todoData: [
-            {description: 'Eat breakfast', id: 1},
-            {description: 'Learn JavaScript', id: 2},
-            {description: 'Reading book', id: 3}
+            {description: 'Eat breakfast', id: 1, isCompleted: false},
+            {description: 'Learn JavaScript', id: 2, isCompleted: false},
+            {description: 'Reading book', id: 3, isCompleted: false},
+            {description: 'Reading book Star Wars', id: 4, isCompleted: false}
         ]
     }
     deleteTask = (id) => {
@@ -26,13 +27,44 @@ class App extends React.Component {
             }
         })
     }
+    onToggleDone = (id) => {
+        this.setState(({ todoData }) => {
+            const index = todoData.findIndex((elem) => elem.id === id)
+            const newItem = { ...todoData[index], isCompleted: !todoData[index].isCompleted }
+            const newArr = [...todoData.slice(0, index), newItem, ...todoData.slice(index + 1)]
+
+            return {
+                todoData: newArr
+            }
+        })
+    }
+    addNewTask = (desc) => {
+        const newItem = this.createTodoItem(desc)
+        this.setState(({ todoData }) => {
+            let newArr = [...todoData, newItem]
+            return {
+                todoData: newArr
+            }
+        })
+    }
+    createTodoItem(desc) {
+        return {
+            description: desc,
+            isCompleted: false,
+            id: Math.random() * 10
+        }
+    }
 
     render() {
         return (
             <div className="todoapp">
-            <NewTaskForm />
+            <NewTaskForm addNewTask={ this.addNewTask }/>
             <section className="main">
-                <TaskList taskList = { this.state.todoData } deleteTask={ this.deleteTask }/>
+                <TaskList 
+                    taskList = { this.state.todoData }
+                    deleteTask={ this.deleteTask } 
+                    onToggleDone={ this.onToggleDone }
+                />
                 <Footer />
             </section>
         </div>
