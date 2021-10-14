@@ -56,6 +56,9 @@ class App extends React.Component {
     }
 
     render() {
+
+        const count = this.state.todoData.filter((elem) => !elem.isCompleted).length
+
         return (
             <div className="todoapp">
             <NewTaskForm addNewTask={ this.addNewTask }/>
@@ -65,7 +68,7 @@ class App extends React.Component {
                     deleteTask={ this.deleteTask } 
                     onToggleDone={ this.onToggleDone }
                 />
-                <Footer />
+                <Footer count={ count }/>
             </section>
         </div>
         )
