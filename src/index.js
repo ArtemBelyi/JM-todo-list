@@ -54,6 +54,14 @@ class App extends React.Component {
             id: Math.random() * 10
         }
     }
+    clearCompleted = () => {
+        this.setState(({ todoData }) => {
+            let newArr = [...todoData].filter(item => !item.isCompleted)
+            return {
+                todoData: newArr
+            }
+        })
+    }
 
     render() {
 
@@ -68,7 +76,7 @@ class App extends React.Component {
                     deleteTask={ this.deleteTask } 
                     onToggleDone={ this.onToggleDone }
                 />
-                <Footer count={ count }/>
+                <Footer count={ count } clearCompleted = { this.clearCompleted }/>
             </section>
         </div>
         )

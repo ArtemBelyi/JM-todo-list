@@ -1,18 +1,14 @@
 import React from 'react';
+import ButtonFilter from '../ButtonFilter/ButtonFilter';
 
-const TaskFilter = () => {
-    return (
-        <ul className="filters">
-            <li>
-            <button className="selected">All</button>
-            </li>
-            <li>
-            <button>Active</button>
-            </li>
-            <li>
-            <button>Completed</button>
-            </li>
-        </ul>
-    )
+export default class TaskFilter extends React.Component {
+    render() {
+        return (
+            <ul className="filters">
+                <ButtonFilter label="All" />
+                <ButtonFilter label="Active" />
+                <ButtonFilter label="Completed" />
+            </ul>
+        )
+    }
 }
-export default TaskFilter;
