@@ -20,7 +20,7 @@ class App extends React.Component {
         
             const index = todoData.findIndex((elem) => elem.id === id)
             const newArr = [...todoData.slice(0, index), ...todoData.slice(index + 1)]
-
+            console.log(newArr)
             return {
                 todoData: newArr
             }
