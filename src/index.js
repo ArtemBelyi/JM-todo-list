@@ -14,7 +14,8 @@ class App extends React.Component {
             {description: 'Learn JavaScript', id: 2, isCompleted: false},
             {description: 'Reading book', id: 3, isCompleted: false},
             {description: 'Reading book Star Wars', id: 4, isCompleted: false}
-        ]
+        ],
+        filter: 'All'
     }
     deleteTask = (id) => {
         this.setState(({ todoData }) => {
@@ -62,21 +63,40 @@ class App extends React.Component {
             }
         })
     }
+    filterPost = (items, filter) => {
+        if (filter === 'Active') {
+            return items.filter(item => !item.isCompleted)
+        }
+        else if (filter === 'Completed') {
+            return items.filter(item => item.isCompleted)
+        }
+        else {
+            return items
+        }
+    }
+    onFilterSelect = (filter) => {
+        this.setState({ filter: filter })
+    }
 
     render() {
 
         const count = this.state.todoData.filter((elem) => !elem.isCompleted).length
+        const visiblePosts = this.filterPost(this.state.todoData, this.state.filter)
 
         return (
             <div className="todoapp">
             <NewTaskForm addNewTask={ this.addNewTask }/>
             <section className="main">
                 <TaskList 
-                    taskList = { this.state.todoData }
+                    taskList = { visiblePosts }
                     deleteTask={ this.deleteTask } 
                     onToggleDone={ this.onToggleDone }
                 />
-                <Footer count={ count } clearCompleted = { this.clearCompleted }/>
+                <Footer count={ count } 
+                        clearCompleted = { this.clearCompleted }
+                        filter= { this.state.filter }
+                        onFilterSelect= { this.onFilterSelect }
+                />
             </section>
         </div>
         )
