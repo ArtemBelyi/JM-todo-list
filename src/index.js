@@ -85,20 +85,20 @@ class App extends React.Component {
 
         return (
             <div className="todoapp">
-            <NewTaskForm addNewTask={ this.addNewTask }/>
-            <section className="main">
-                <TaskList 
-                    taskList = { visiblePosts }
-                    deleteTask={ this.deleteTask } 
-                    onToggleDone={ this.onToggleDone }
-                />
-                <Footer count={ count } 
-                        clearCompleted = { this.clearCompleted }
-                        filter= { this.state.filter }
-                        onFilterSelect= { this.onFilterSelect }
-                />
-            </section>
-        </div>
+                <NewTaskForm addNewTask={ this.addNewTask }/>
+                <section className="main">
+                    <TaskList 
+                        taskList = { visiblePosts }
+                        deleteTask={ this.deleteTask } 
+                        onToggleDone={ this.onToggleDone }
+                    />
+                    <Footer count={ count } 
+                            clearCompleted = { this.clearCompleted }
+                            filter= { this.state.filter }
+                            onFilterSelect= { this.onFilterSelect }
+                    />
+                </section>
+            </div>
         )
     }
 }
