@@ -1,8 +1,15 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types';
 
 
 export default class Task extends React.Component {
+
+    static propTypes = {
+        prop: PropTypes.arrayOf(PropTypes.object),
+        deleteTask: PropTypes.func.isRequired,
+        onToggleDone: PropTypes.func.isRequired
+    }
 
     constructor(props) {
         super(props)
@@ -20,10 +27,15 @@ export default class Task extends React.Component {
         }))
     }
     componentDidMount = () => {
-        this.interval = setInterval(() => this.tick(), 10000)
+        const { updateInterval } = this.props
+        this.interval = setInterval(() => this.tick(), updateInterval)
     }
     componentWillUnmount = () => {
         clearInterval(this.interval);
+    }
+
+    static defaultProps = {
+        updateInterval: 15000
     }
 
     render() {

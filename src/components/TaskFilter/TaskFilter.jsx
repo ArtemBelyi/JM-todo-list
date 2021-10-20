@@ -1,6 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TaskFilter extends React.Component {
+
+    static propTypes = {
+        filter: PropTypes.string.isRequired,
+        onFilterSelect: PropTypes.func.isRequired
+    }
     constructor(props) {
         super(props)
         this.buttons = [
