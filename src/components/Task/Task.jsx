@@ -1,62 +1,63 @@
 import React from 'react';
-import { formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 
-
 export default class Task extends React.Component {
+  static propTypes = {
+    deleteTask: PropTypes.func.isRequired,
+    onToggleDone: PropTypes.func.isRequired,
+    updateInterval: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
+  };
 
-    static propTypes = {
-        prop: PropTypes.arrayOf(PropTypes.object),
-        deleteTask: PropTypes.func.isRequired,
-        onToggleDone: PropTypes.func.isRequired
-    }
+  static defaultProps = {
+    updateInterval: 15000,
+  };
 
-    constructor(props) {
-        super(props)
-        this.state = { seconds: 0 }
-        this.createDateTask = Date.now()
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+    this.createDateTask = Date.now();
+  }
 
-    }
-    textData = (data) => {
-        return formatDistanceToNow(data,{includeSeconds: true})
-    }
+  textData = (data) => formatDistanceToNow(data, { includeSeconds: true });
 
-    tick = () => {
-        this.setState(state => ({
-            seconds: this.textData(this.createDateTask)
-        }))
-    }
-    componentDidMount = () => {
-        const { updateInterval } = this.props
-        this.interval = setInterval(() => this.tick(), updateInterval)
-    }
-    componentWillUnmount = () => {
-        clearInterval(this.interval);
-    }
+  tick = () => {
+    this.setState(() => ({
+      seconds: this.textData(this.createDateTask),
+    }));
+  };
 
-    static defaultProps = {
-        updateInterval: 15000
-    }
+  componentDidMount = () => {
+    const { updateInterval } = this.props;
+    this.interval = setInterval(() => this.tick(), updateInterval);
+  };
 
-    render() {
-        const { description, deleteTask, isCompleted, onToggleDone } = this.props
+  componentWillUnmount = () => {
+    clearInterval(this.interval);
+  };
 
-        let className = ''
-        if(isCompleted) className += 'completed'
+  render() {
+    const { description, deleteTask, isCompleted, onToggleDone } = this.props;
+    const { seconds } = this.state
 
-        return (
-            <li className= { className }>
-                <div className="view">
-                    <input className="toggle" type="checkbox" onChange={ onToggleDone }></input>
-                    <label>
-                        <span className="description">{ description }</span>
-                        <span className="created">created { this.state.seconds } ago</span>
-                    </label>
-                    <button className="icon icon-edit"></button>
-                    <button className="icon icon-destroy" onClick={ deleteTask }></button>
-                </div>
-            </li>
-        )
+    let className = '';
+    if (isCompleted) className += 'completed';
 
-    }
+    return (
+      <li className={className}>
+        <div className="view">
+          <input className="toggle" type="checkbox" onChange={onToggleDone} />
+          <label>
+            <span className="description">{description}</span>
+            <span className="created">created {seconds} ago</span>
+          </label>
+          <button className="icon icon-edit" type="button" label="edit"/>
+          <button className="icon icon-destroy" type="button" label="destroy"
+          onClick={deleteTask} />
+        </div>
+      </li>
+    );
+  }
 }
