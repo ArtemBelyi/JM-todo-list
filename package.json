@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "lint": "eslint --fix --ext .js,.jsx .",
+    "lint": "eslint --fix --ext .js,.jsx --color.",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "eslintConfig": {
