@@ -83,7 +83,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { todoData, filter } = this.state
+    const { todoData, filter } = this.state;
     const count = todoData.filter((elem) => !elem.isCompleted).length;
     const visiblePosts = this.filterPost(todoData, filter);
 

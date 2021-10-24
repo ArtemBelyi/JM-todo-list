@@ -6,7 +6,7 @@ export default class Task extends React.Component {
   static propTypes = {
     deleteTask: PropTypes.func.isRequired,
     onToggleDone: PropTypes.func.isRequired,
-    updateInterval: PropTypes.string,
+    updateInterval: PropTypes.number,
     description: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
   };
@@ -40,7 +40,7 @@ export default class Task extends React.Component {
 
   render() {
     const { description, deleteTask, isCompleted, onToggleDone } = this.props;
-    const { seconds } = this.state
+    const { seconds } = this.state;
 
     let className = '';
     if (isCompleted) className += 'completed';
@@ -53,9 +53,8 @@ export default class Task extends React.Component {
             <span className="description">{description}</span>
             <span className="created">created {seconds} ago</span>
           </label>
-          <button className="icon icon-edit" type="button" label="edit"/>
-          <button className="icon icon-destroy" type="button" label="destroy"
-          onClick={deleteTask} />
+          <button className="icon icon-edit" type="button" label="edit" />
+          <button className="icon icon-destroy" type="button" label="destroy" onClick={deleteTask} />
         </div>
       </li>
     );

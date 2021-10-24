@@ -14,9 +14,9 @@ export default class NewTaskForm extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const { addNewTask } = this.props
-    const { description } = this.state
-    addNewTask( description );
+    const { addNewTask } = this.props;
+    const { description } = this.state;
+    addNewTask(description);
     this.removeInput();
   };
 
@@ -25,7 +25,7 @@ export default class NewTaskForm extends React.Component {
   }
 
   render() {
-    const { description } = this.state
+    const { description } = this.state;
     return (
       <header className="header">
         <h1>todos</h1>
@@ -34,7 +34,7 @@ export default class NewTaskForm extends React.Component {
             className="new-todo"
             placeholder="What needs to be done?"
             onChange={this.onDescriptionChange}
-            value={ description }
+            value={description}
           />
         </form>
       </header>
